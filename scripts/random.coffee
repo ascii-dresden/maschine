@@ -1,5 +1,5 @@
 # Description:
-#   Ein paar weitere kleine Antworten von matthias
+#   Ein paar weitere kleine Antworten von maschine
 #
 # Dependencies:
 #   None
@@ -21,16 +21,16 @@ module.exports = (robot) ->
     if user == donny
       msg.send msg.random walter_quotes
 
-  robot.hear /matthias ist (.*)/i, (msg) ->
+  robot.hear /maschine ist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()
     if adj.indexOf("die tür") == -1 and adj.indexOf("die tuer") == -1
       msg.reply "Deine Mudda ist #{adj}!"
 
-  robot.hear /matthias,? du bist (.*)/i, (msg) ->
+  robot.hear /maschine,? du bist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()
     msg.reply "Deine Mudda ist #{adj}!"
 
-  robot.hear /matthias scheißt auf (.*)/i, (msg) ->
+  robot.hear /maschine scheißt auf (.*)/i, (msg) ->
     term = msg.match[1]
     msg.reply "Deine Mudda scheißt auf #{term}!"
 

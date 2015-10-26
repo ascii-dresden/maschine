@@ -1,9 +1,9 @@
 {
-  "name": "matthias",
+  "name": "k.maschine",
   "version": "0.0.0",
   "private": true,
-  "author": "Matthias Stuhlbein <matthias.stuhlbein@du-dresden.de>",
-  "description": "Hallo, ich bin Matthias Stuhlbein",
+  "author": "Matthias Stuhlbein <k.maschine@ascii-dresden.de>",
+  "description": "Hallo, ich bin Karl Andreas Fabian Friedrich Emanuel Erik Maschine",
   "dependencies": {
     "cron": "^1.0.9",
     "flip": "^0.1.1",

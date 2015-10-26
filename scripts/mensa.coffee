@@ -16,7 +16,7 @@
 # Author:
 #   kiliankoe - me@kilian.io
 #   Justus Adam - me@justus.science
-#   Philipp Heisig - matthias@pheisig.de
+#   Philipp Heisig - maschine@pheisig.de
 
 cronjob = require("cron").CronJob
 
@@ -179,7 +179,7 @@ module.exports = (robot) ->
         null
     ).filter((name) -> name != null)
 
-    msg.send "Ich kann dir heutige Speisepläne für die folgenden Mensen holen:\n - #{names.join('\n - ')}\nSprich' mich einfach mit `matthias mensa <mensa>` an."
+    msg.send "Ich kann dir heutige Speisepläne für die folgenden Mensen holen:\n - #{names.join('\n - ')}\nSprich' mich einfach mit `maschine mensa <mensa>` an."
 
 formatOutput = (meal) ->
   imgcnt++
