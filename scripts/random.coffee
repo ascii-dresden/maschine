@@ -20,18 +20,33 @@ module.exports = (robot) ->
     if user == donny
       msg.send msg.random walter_quotes
 
+  robot.hear /(hi|hey|hallo|hey there|hello|guten tag|whats up| what's up) maschine/i, (msg) ->
+    greeting = msg.match[1]
+    user = msg.message.user.name
+    msg.send msg.random [
+      "hey there", "hey there", "hey there"
+      "war das #{user}?"
+      "hallöle", "ja"
+      "na", "was?", "was denn?", "ja, #{user}"
+      "ich glaub #{user} mag mich"
+      "#{user}, #{greeting}"
+      "#{user}, kann ich dir helfen?"
+      "#{user}, Kaffee?"
+      "#{greeting} #{user}"
+    ]
+
   robot.hear /maschine ist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()
     if adj.indexOf("die tür") == -1 and adj.indexOf("die tuer") == -1
-      msg.reply "Deine Mudda ist #{adj}!"
+      msg.reply "Du bist #{adj}!"
 
   robot.hear /maschine,? du bist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()
-    msg.reply "Deine Mudda ist #{adj}!"
+    msg.reply "Meinst du? \"#{adj}\" ist ein ganz schön harter Ausdruck!"
 
   robot.hear /maschine scheißt auf (.*)/i, (msg) ->
     term = msg.match[1]
-    msg.reply "Deine Mudda scheißt auf #{term}!"
+    msg.reply "japp, #{term} ist mir Wurst!"
 
   robot.respond /random (\d*) (\d*)/i, (msg) ->
     min = msg.match[1]
@@ -45,8 +60,8 @@ randomRange = (min, max) ->
 
 donny = "slackbot"
 walter_quotes = [
-  "Shut the fuck up, #{donny}.",
-  "#{donny}, you're out of your element!",
-  "#{donny}, shut the f—",
+  "Du bist gar kein richtiger Bot, #{donny}.",
+  "Ich glaube #{donny}, hasst mich!",
+  "#{donny}, ",
   "That's exiti-- Shut the fuck up, #{donny}!"
 ]
