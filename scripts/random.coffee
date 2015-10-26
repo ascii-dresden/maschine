@@ -26,7 +26,7 @@ module.exports = (robot) ->
     msg.send msg.random [
       "hey there", "hey there", "hey there"
       "war das #{user}?"
-      "hallöle", "ja"
+      "hallöle", "ja?"
       "na", "was?", "was denn?", "ja, #{user}"
       "ich glaub #{user} mag mich"
       "#{user}, #{greeting}"
@@ -34,6 +34,9 @@ module.exports = (robot) ->
       "#{user}, Kaffee?"
       "#{greeting} #{user}"
     ]
+
+  robot.hear /maschine (.*) version/i, (msg) ->
+    msg.reply "Ich bin jetzt v0.1.0, find me on [github](http://github.com/ascii-dresden/maschine)"
 
   robot.hear /maschine ist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()

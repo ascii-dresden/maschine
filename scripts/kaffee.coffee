@@ -40,10 +40,10 @@ KaffeePreise=
   browny:                   [ "Brownie",                   "ein wenig wie ein Stück Kuchen",       "Kuchen",       1.00]
   baguette:                 [ "Baguette",                  "ein langes Brötchen",                  "Submarine",    2.30]
   broetchen:                [ "Brötchen",                  "ein belegtes Brötchen",                "Brötchen",     1.40]
-  schokoriegel06:           [ "Süßigkeit",                 "Kalorien",                             "Kalorien",     0.60]
-  schokoriegel05:           [ "Süßigkeit",                 "Kalorien",                             "Kalorien",     0.50]
-  schokoriegel02:           [ "Süßigkeit",                 "Kalorien",                             "Kalorien",     0.20]
-  schokoriegel10:           [ "Süßigkeit",                 "Kalorien",                             "Kalorien",     1.00]
+  schokoriegel06:           [ "Schokoriegel",              "Kalorien",                             "Kalorien",     0.60]
+  schokoriegel05:           [ "Schokoriegel",              "Kalorien",                             "Kalorien",     0.50]
+  schokoriegel02:           [ "Lakritze",                  "Süßigkeit aus Süßholz",                "Kalorien",     0.20]
+  schokoriegel10:           [ "LuxusZucker",               "viel zu teurer Zucker",                "Kalorien",     1.00]
   pfand:                    [ "Pfand",                     "für den Komfort die Tasse mitzunehmen","Pfand",        1.00]
   togo:                     [ "TOGO Becher",               "für Leute denen Komfort wichtiger ist als die Umwelt","Müll",0.10]
   milch:                    [ "Milch",                     "Getränk aus der Kuh",                  "",             0.50]
@@ -87,16 +87,22 @@ KaffeeMatches= # lowercase all the things!
 
 lookup_price = (name) ->
   for key, terms of KaffeeMatches
-    if name.toLowerCase() in terms
+    if name in terms
       return KaffeePreise[key]
 
 module.exports = (maschine) ->
 
-  maschine.hear /(?:wieviel|was|wieviel geld) (?:kosten|kostet|zahlt man|kommt|bezahlt man|legt man| )*(?:hin|denn|eigentlich|gerade|hier|zur zeit|momentan|für|so|)*((?:ein|einen|eine|n|ne|'n|die|der|das|unser|unsere| )*(\w*))(?:hin|hier|heute|im allgemeinen)*/i, (msg) ->
+  maschine.hear /(?:wieviel|was|wieviel geld) (?:kosten|kostet|zahlt man|kommt|bezahlt man|legt man| )+(?:hin|denn|eigentlich|gerade|jetzt|hier|zur zeit|momentan|f.r|so| )*((?:einen|eine|ein|nen|ne|n|'n|die|der|das|unsere|unser| )*(\w*))(?:hin|hier|heute|im allgemeinen)*/i, (msg) ->
     search = msg.match[1]
-    term   = msg.match[2]
+    term   = msg.match[2].toLowerCase()
+    if term == "kaffeemaschine"
+      msg.send msg.random [
+        "Hallo! Sag mal hakt's? Ich bin nicht zu verkaufen?"
+        "Ich bin unbezahlbar!"
+        "Geht's noch?"
+      ]
+      return
     hit = lookup_price(term)
-    console.log msg.match
     if hit == undefined
       msg.send msg.random [
         "Sorry, \"#{term}\" sagt mir nix", "Bitte was? #{term} gibt es hier nicht."
@@ -119,7 +125,7 @@ module.exports = (maschine) ->
         "Hast du bei uns noch nie #{search} gekauft? Das macht #{price}!",
         "Na #{search} kann doch nur #{price} kosten!",
         "Hast du für #{search} schon mal mehr als #{price} bezahlt!",
-        "Warum fragst du mich? Ich mach hier nur kaffee!",
+        "Warum fragst du mich? Ich mach hier nur Kaffee!",
         "#{price} #{search} immer nur #{price}",
         "Ich glaub #{price}",
         "So weit ich weiß #{price}, wenn du mit \"#{search}\" das gleiche meinst wie ich :D",
@@ -130,14 +136,23 @@ module.exports = (maschine) ->
         "#{search}? pfff - frag mich später nochmal",
         "Wir haben #{search}?",
         "früher, da hat #{search} mal weniger als #{price} gekostet",
-        "wenn's hier nach mir ging, würde #{search} weniger als #{price} kosten aber ich bin ja nur die kaffeemaschine",
+        "Wenn's hier nach mir ging, würde #{search} weniger als #{price} kosten aber ich bin ja nur die Kaffeemaschine",
         "meinst du #{name}?",
       ]
 
-  maschine.hear /was ist(?:denn|eigentlich|gerade|hier|zur zeit|momentan|so| )*((?:ein||einen|eine|n|ne|'n|die|der|das|unser|unsere| )*(\w*))/i, (msg) ->
+  maschine.hear /was ist(?:denn|eigentlich|gerade|hier|zur zeit|momentan|so| )*((?:einen|eine|ein|nen|ne|n|'n|die|der|das|unsere|unser| )*(\w*))/i, (msg) ->
     search = msg.match[1]
-    term   = msg.match[2]
+    term   = msg.match[2].toLowerCase()
     hit = lookup_price(term)
+    if term == "kaffeemaschine"
+      msg.send msg.random [
+        "Ich bin hier das was alles am Laufen hällt"
+        "Ich bin die \"Cafina XT6\""
+        "Ich bin die \"Cafina XT6\", auf mir läuft Windows :cry:"
+        "Ich bin die \"Cafina XT6\" - Asta la Vista"
+        "*ICH* bin hier die Kaffeemaschine"
+      ]
+      return
     if hit == undefined
       msg.send "Sorry, #{search} sagt mir nix"
     else
