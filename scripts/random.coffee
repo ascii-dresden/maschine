@@ -20,6 +20,12 @@ module.exports = (robot) ->
     if user == donny
       msg.send msg.random walter_quotes
 
+  robot.hear /(:w|:wq|:wqa|:q)./i, (msg) ->
+    msg.reply "Das ist nicht vim, das ist Slack!"
+
+  robot.hear /(hi|hey|hallo|hey there|hello|guten tag|whats up| what's up) cafina/i, (msg) ->
+    msg.reply "Wohher weißt du meinen Namen? *Das hat dir der Teufel gesagt!!*"
+
   robot.hear /(hi|hey|hallo|hey there|hello|guten tag|whats up| what's up) maschine/i, (msg) ->
     greeting = msg.match[1]
     user = msg.message.user.name
@@ -35,8 +41,16 @@ module.exports = (robot) ->
       "#{greeting} #{user}"
     ]
 
-  robot.hear /maschine (.*) version/i, (msg) ->
-    msg.reply "Ich bin jetzt v0.1.0, find me on [github](http://github.com/ascii-dresden/maschine)"
+  robot.hear /danke (kaffee)*maschine/i, (msg) ->
+    user = msg.message.user.name
+    msg.send "Bitte #{user}"
+
+  robot.hear /.*hoffe.*maschine(.*)/i, (msg) ->
+    user = msg.message.user.name
+    msg.send "das hoffe ich auch #{user}"
+
+  robot.hear /maschine(.*)version/i, (msg) ->
+    msg.reply "Ich bin jetzt v0.1.1, find me on [github](http://github.com/ascii-dresden/maschine)"
 
   robot.hear /maschine ist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()

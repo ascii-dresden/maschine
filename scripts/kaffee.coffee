@@ -92,7 +92,7 @@ lookup_price = (name) ->
 
 module.exports = (maschine) ->
 
-  maschine.hear /(?:wieviel|was|wieviel geld) (?:kosten|kostet|zahlt man|kommt|bezahlt man|legt man| )+(?:hin|denn|eigentlich|gerade|jetzt|hier|zur zeit|momentan|f.r|so| )*((?:einen|eine|ein|nen|ne|n|'n|die|der|das|unsere|unser| )*(\w*))(?:hin|hier|heute|im allgemeinen)*/i, (msg) ->
+  maschine.hear /(?:wieviel|was|wieviel geld) (?:kosten|kostet|zahlt man|kommt|bezahlt man|legt man| )+(?:hin|denn|eigentlich|gerade|jetzt|hier|zur zeit|momentan|f.r|so| )*((?:einen|eine|ein|nen|ne|n|'n|die|der|das|unsere|unser| )*((?:\w|\s)*))(?:hin|hier|heute|im allgemeinen)*/i, (msg) ->
     search = msg.match[1]
     term   = msg.match[2].toLowerCase()
     if term == "kaffeemaschine"
@@ -134,13 +134,13 @@ module.exports = (maschine) ->
         "Materielle Werte interessieren mich nicht, ich bin hier nur die Kaffeemaschine!",
         "#{price}?",
         "#{search}? pfff - frag mich später nochmal",
-        "Wir haben #{search}?",
+        "Wir haben #{search}? Ach stimmt, #{price}",
         "früher, da hat #{search} mal weniger als #{price} gekostet",
         "Wenn's hier nach mir ging, würde #{search} weniger als #{price} kosten aber ich bin ja nur die Kaffeemaschine",
         "meinst du #{name}?",
       ]
 
-  maschine.hear /was ist(?:denn|eigentlich|gerade|hier|zur zeit|momentan|so| )*((?:einen|eine|ein|nen|ne|n|'n|die|der|das|unsere|unser| )*(\w*))/i, (msg) ->
+  maschine.hear /was ist(?:denn|eigentlich|gerade|hier|zur zeit|momentan|so| )*((?:einen|eine|ein|nen|ne|n|'n|die|der|das|unsere|unser| )*((?:\w|\s)*))/i, (msg) ->
     search = msg.match[1]
     term   = msg.match[2].toLowerCase()
     hit = lookup_price(term)
