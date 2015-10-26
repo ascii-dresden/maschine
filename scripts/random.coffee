@@ -8,7 +8,6 @@
 #   None
 #
 # Commands:
-#   hubot bash me - Frag' hubot nach einem random Zitat link
 #   hubot random <min> <max> - Frag' hubot nach einer Zufallszahl zwischen <min> und <max> (nutzt random.org)
 #
 # Author:
@@ -34,9 +33,6 @@ module.exports = (robot) ->
     term = msg.match[1]
     msg.reply "Deine Mudda scheißt auf #{term}!"
 
-  robot.hear /bash me/i, (msg) ->
-    msg.send "http://bash.fsrleaks.de/?#{randomRange(1, 677)}"
-
   robot.respond /random (\d*) (\d*)/i, (msg) ->
     min = msg.match[1]
     max = msg.match[2]
@@ -50,8 +46,7 @@ randomRange = (min, max) ->
 donny = "slackbot"
 walter_quotes = [
   "Shut the fuck up, #{donny}.",
-  "Forget it, #{donny}, you're out of your element!",
   "#{donny}, you're out of your element!",
   "#{donny}, shut the f—",
-  "That's ex-- Shut the fuck up, #{donny}!"
+  "That's exiti-- Shut the fuck up, #{donny}!"
 ]

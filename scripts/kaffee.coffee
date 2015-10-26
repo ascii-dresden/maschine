@@ -7,6 +7,8 @@
 #   Uncomment the ones you want to try and experiment with.
 #
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
+# Commands:
+#   hubot wieviel kostet ein <getraenk> - Frag' hubot wie viel ein gewisses <getraenk> kostet
 
 KaffeePreise=
  kaffee:                    [ "Kaffee",                    "Kaffee",                            "C",            0.80 ]
