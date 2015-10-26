@@ -2,7 +2,7 @@
   "name": "k.maschine",
   "version": "0.0.0",
   "private": true,
-  "author": "Matthias Stuhlbein <k.maschine@ascii-dresden.de>",
+  "author": "K. Maschine <k.maschine@ascii-dresden.de>",
   "description": "Hallo, ich bin Karl Andreas Fabian Friedrich Emanuel Erik Maschine",
   "dependencies": {
     "cron": "^1.0.9",
