@@ -24,6 +24,8 @@ simpleresponses = [
 
 simplelistens = [
   [/jehova/i, "http://i.imgur.com/01PMBGj.gif"],
+  [/sparta/i, "http://i.imgur.com/AacKWRt.gif"],
+  [/grumpy/i, "http://truestorieswithgill.com/wp-content/uploads/2013/09/20130915-190532.jpg"],
   [/madness/i, "Madness you say? THIS. IS. PATRI... MATTHIAS!"],
   [/^nein$/i, "Doch!"]
 ]
