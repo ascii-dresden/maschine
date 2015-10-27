@@ -13,9 +13,11 @@
 # Author:
 #   kiliankoe
 
+max_smokecount = 5
 smokealert = (robot,msg)->
-      robot.smokecounter = if robot.smokecounter then robot.smokecounter+1 else 1
-      if robot.smokecounter % 6 == 0
+      robot.smokecounter = if robot.smokecounter? then robot.smokecounter+1 else 0
+      console.log "smoke alert state #{(robot.smokecounter%max_smokecount) + 1}/#{max_smokecount}"
+      if robot.smokecounter % max_smokecount == 0
         msg.reply msg.random [
           "Raucher sterben früher."
           "Rauchen kann tödlich sein."
@@ -29,13 +31,11 @@ smokealert = (robot,msg)->
           "Rauchen kann zu einem langsamen und schmerzhaften Tod führen."
           "Hier finden Sie Hilfe, wenn Sie das Rauchen aufgeben möchten: Bundeszentrale für gesundheitliche Aufklärung (BZgA) Tel.: 01805-313131, www.rauchfrei-info.de."
           "Rauchen kann zu Durchblutungsstörungen führen und verursacht Impotenz."
-          "Warnhinweis auf einer Zigarettenschachtel"
           "Rauchen lässt Ihre Haut altern."
           "Rauchen kann die Spermatozoen schädigen und schränkt die Fruchtbarkeit ein."
           "Rauch enthält Benzol, Nitrosamine, Formaldehyd und Blausäure."
           "Rauchen fügt Ihnen und den Menschen in Ihrer Umgebung erheblichen Schaden zu."
         ]
-
 
 module.exports = (robot) ->
   robot.hear /.*/, (msg) ->
@@ -69,28 +69,20 @@ module.exports = (robot) ->
 
   robot.hear /danke (kaffee)*maschine/i, (msg) ->
     user = msg.message.user.name
-    msg.send msg.random [
-      "Bitte #{user}"
-      "Gerne #{user}"
-      "Kein Ding"
-      "Kein Ding #{user}"
-    ]
+    msg.send msg.random [ "Bitte #{user}", "Gerne #{user}", "Kein Ding", "Kein Ding #{user}" ]
 
   robot.hear /.*hoffe.*/i, (msg) ->
     user = msg.message.user.name
     msg.send "das hoffe ich auch #{user}"
-
-  robot.hear /maschine(.*)version/i, (msg) ->
-    msg.reply "Ich bin jetzt v0.1.3, find me on [github](http://github.com/ascii-dresden/maschine)"
 
   robot.hear /maschine ist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()
     if adj.indexOf("die tür") == -1 and adj.indexOf("die tuer") == -1
       msg.reply "Du bist #{adj}!"
 
-  robot.hear /maschine,? du bist (.*)/i, (msg) ->
+  robot.hear /maschine du bist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()
-    msg.reply "Meinst du? \"#{adj}\" ist ein ganz schön harter Ausdruck!"
+    msg.reply msg.random [ "Meinst du? \"#{adj}\" ist ein ganz schön harter Ausdruck!", "Selber #{adj}!", "#{adj} sein gar nicht so schlimm!", "#{adj}? Aber du bist noch #{adj}er", "Kannst du bitte aufhören solche Sachen über mich zu verbreiten", "Das sag ich Hendrik!", "Das sag ich Kilian!" ]
 
   robot.hear /maschine scheißt auf (.*)/i, (msg) ->
     term = msg.match[1]
@@ -109,7 +101,7 @@ randomRange = (min, max) ->
 donny = "slackbot"
 walter_quotes = [
   "Du bist gar kein richtiger Bot, #{donny}.",
-  "Ich glaube #{donny}, hasst mich!",
+  "Ich glaube #{donny} hasst mich!",
   "#{donny} sei still!",
   "Es reicht #{donny}!"
 ]
