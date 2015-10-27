@@ -15,7 +15,7 @@
 
 smokealert = (robot,msg)->
       robot.smokecounter = if robot.smokecounter then robot.smokecounter+1 else 1
-      if robot.smokecounter % 5 == 0
+      if robot.smokecounter % 6 == 0
         msg.reply msg.random [
           "Raucher sterben früher."
           "Rauchen kann tödlich sein."
@@ -42,7 +42,8 @@ module.exports = (robot) ->
     user = msg.message.user.name.toLowerCase()
     if user == donny and Math.random() < .3
       msg.send msg.random walter_quotes
-    if msg.messageRoom == "#rauchen" or msg.message.text.match "rauchen"
+    smokeys = /(rauchen|rauch|cigar|zigar|kippe|fl.mme|fl.ppe|tabak|tabac|glimmst.ngel|glimst.ngel|lungenbr.tchen)/i
+    if msg.messageRoom?.match(smokeys) or msg.message.text.match(smokeys)
       smokealert(robot,msg)
 
   robot.hear /(ZZ|:w|:wq|:wqa|:q)/, (msg) ->
