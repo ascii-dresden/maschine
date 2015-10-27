@@ -64,12 +64,14 @@ KaffeeMatches= # lowercase all the things!
   chococcino:                ["perl", "schokoccino", "chococcino" ]
   chocolate_espresso:        ["objectivec", "chocolate espresso" ]
   white_chocolate_espresso:  ["swift", "white chocolate espresso" ]
-  chocolate:                 ["bash", "chocolate", "kakao", "kakau", "heisse schokolade", "heiße schokolade", "schokolade" ]
-  white_chocolate:           ["javascript", "white chocolate", "weiße schokolade" ]
+  chocolate:                 ["bash", "chocolate", "kakao", "kakau", "heisse schokolade", "hei.e schokolade", "schokolade" ]
+  white_chocolate:           ["javascript", "white chocolate", "wei.e schokolade" ]
   tee:                       ["tee", "schwarzer tee","kräutertee","früchtetee","grüner tee" ]
   heisses_wasser:            ["asm", "wasser","heisses wasser","heißes wasser" ]
   kalt_033:                  ["kleines kaltgetränk", "kleine zotrine", "bionade", "kleine wostok" ]
-  kalt_05:                   ["großes kaltgetränk", "mate", "kolle mate", "premium cola", "premium kola", "zotrine" ]
+  kalt_05:                   ["großes kaltgetränk", "mate", "kolle mate", "premium cola", "premium kola",
+                              "zotrine", "club mate", "rhabarber schorle", "rhabarberschorle", "waldmeister brause",
+                              "granatmate", "club mate granat", "granat" ]
   gluehwein:                 ["glühwein", "omas glühwein", "glühpunsch", "punsch"]
   saft:                      ["saft", "orangensaft", "apfelsaft", "bananensaft", "kirschsaft", "fruchtgetränk","asaft","osaft"]
   bagel:                    ["bagel","begel", "brötchen mit loch"]
@@ -92,7 +94,7 @@ lookup_price = (name) ->
 
 module.exports = (maschine) ->
 
-  maschine.hear /(?:wieviel|was|wieviel geld) (?:kosten|kostet|zahlt man|kommt|bezahlt man|legt man| )+(?:hin|denn|eigentlich|gerade|jetzt|hier|zur zeit|momentan|f.r|so| )*((?:einen|eine|ein|nen|ne|n|'n|die|der|das|unsere|unser| )*((?:\w|\s)*))(?:hin|hier|heute|im allgemeinen)*/i, (msg) ->
+  maschine.hear /(?:wieviel|was|wieviel geld) (?:kosten|kostet|zahlt man|kommt|bezahlt man|legt man| )+(?:hin|denn|eigentlich|gerade|jetzt|hier|zur zeit|momentan|f.r|so| )*((?:einen|eine|ein|nen|ne|n|'n|die|der|das|unsere|unser| )*([^?]*))*/i, (msg) ->
     search = msg.match[1]
     term   = msg.match[2].toLowerCase()
     if term == "kaffeemaschine"

@@ -17,14 +17,14 @@
 module.exports = (robot) ->
   robot.hear /.*/, (msg) ->
     user = msg.message.user.name.toLowerCase()
-    if user == donny
+    if user == donny and Math.random() < .3
       msg.send msg.random walter_quotes
 
-  robot.hear /(:w|:wq|:wqa|:q)./i, (msg) ->
+  robot.hear /(ZZ|:w|:wq|:wqa|:q)/i, (msg) ->
     msg.reply "Das ist nicht vim, das ist Slack!"
 
   robot.hear /(hi|hey|hallo|hey there|hello|guten tag|whats up| what's up) cafina/i, (msg) ->
-    msg.reply "Wohher weißt du meinen Namen? *Das hat dir der Teufel gesagt!!*"
+    msg.reply "Woher weißt du meinen Namen? *Das hat dir der Teufel gesagt!!*"
 
   robot.hear /(hi|hey|hallo|hey there|hello|guten tag|whats up| what's up) maschine/i, (msg) ->
     greeting = msg.match[1]
@@ -41,16 +41,45 @@ module.exports = (robot) ->
       "#{greeting} #{user}"
     ]
 
+  robot.hear /.*/, (msg)->
+    if msg.messageRoom == "#rauchen"
+      robot.smokecounter = if robot.smokecounter then robot.smokecounter+1 else 1
+      if robot.smokecounter % 5 == 0
+        msg.reply msg.random [
+          "Raucher sterben früher."
+          "Rauchen kann tödlich sein."
+          "Rauchen führt zur Verstopfung der Arterien und verursacht Herzinfarkte und Schlaganfälle."
+          "Rauchen verursacht tödlichen Lungenkrebs."
+          "Rauchen in der Schwangerschaft schadet Ihrem Kind."
+          "Schützen Sie Kinder – lassen Sie sie nicht Ihren Tabakrauch einatmen!"
+          "Ihr Arzt oder Apotheker kann Ihnen dabei helfen, das Rauchen aufzugeben."
+          "Rauchen macht sehr schnell abhängig: Fangen Sie gar nicht erst an!"
+          "Wer das Rauchen aufgibt, verringert das Risiko tödlicher Herz- und Lungenerkrankungen."
+          "Rauchen kann zu einem langsamen und schmerzhaften Tod führen."
+          "Hier finden Sie Hilfe, wenn Sie das Rauchen aufgeben möchten: Bundeszentrale für gesundheitliche Aufklärung (BZgA) Tel.: 01805-313131, www.rauchfrei-info.de."
+          "Rauchen kann zu Durchblutungsstörungen führen und verursacht Impotenz."
+          "Warnhinweis auf einer Zigarettenschachtel"
+          "Rauchen lässt Ihre Haut altern."
+          "Rauchen kann die Spermatozoen schädigen und schränkt die Fruchtbarkeit ein."
+          "Rauch enthält Benzol, Nitrosamine, Formaldehyd und Blausäure."
+          "Rauchen fügt Ihnen und den Menschen in Ihrer Umgebung erheblichen Schaden zu."
+        ]
+
   robot.hear /danke (kaffee)*maschine/i, (msg) ->
     user = msg.message.user.name
-    msg.send "Bitte #{user}"
+    msg.send msg.random [
+      "Bitte #{user}"
+      "Gerne #{user}"
+      "Kein Ding"
+      "Kein Ding #{user}"
+    ]
 
-  robot.hear /.*hoffe.*maschine(.*)/i, (msg) ->
+  robot.hear /.*hoffe.*/i, (msg) ->
     user = msg.message.user.name
     msg.send "das hoffe ich auch #{user}"
 
   robot.hear /maschine(.*)version/i, (msg) ->
-    msg.reply "Ich bin jetzt v0.1.1, find me on [github](http://github.com/ascii-dresden/maschine)"
+    msg.reply "Ich bin jetzt v0.1.2, find me on [github](http://github.com/ascii-dresden/maschine)"
 
   robot.hear /maschine ist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()
@@ -79,6 +108,6 @@ donny = "slackbot"
 walter_quotes = [
   "Du bist gar kein richtiger Bot, #{donny}.",
   "Ich glaube #{donny}, hasst mich!",
-  "#{donny}, ",
-  "That's exiti-- Shut the fuck up, #{donny}!"
+  "#{donny} sei still!",
+  "Es reicht #{donny}!"
 ]
