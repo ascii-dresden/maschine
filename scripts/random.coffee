@@ -13,36 +13,7 @@
 # Author:
 #   kiliankoe
 
-
-module.exports = (robot) ->
-  robot.hear /.*/, (msg) ->
-    user = msg.message.user.name.toLowerCase()
-    if user == donny and Math.random() < .3
-      msg.send msg.random walter_quotes
-
-  robot.hear /(ZZ|:w|:wq|:wqa|:q)/i, (msg) ->
-    msg.reply "Das ist nicht vim, das ist Slack!"
-
-  robot.hear /(hi|hey|hallo|hey there|hello|guten tag|whats up| what's up) cafina/i, (msg) ->
-    msg.reply "Woher weißt du meinen Namen? *Das hat dir der Teufel gesagt!!*"
-
-  robot.hear /(hi|hey|hallo|hey there|hello|guten tag|whats up| what's up) maschine/i, (msg) ->
-    greeting = msg.match[1]
-    user = msg.message.user.name
-    msg.send msg.random [
-      "hey there", "hey there", "hey there"
-      "war das #{user}?"
-      "hallöle", "ja?"
-      "na", "was?", "was denn?", "ja, #{user}"
-      "ich glaub #{user} mag mich"
-      "#{user}, #{greeting}"
-      "#{user}, kann ich dir helfen?"
-      "#{user}, Kaffee?"
-      "#{greeting} #{user}"
-    ]
-
-  robot.hear /.*/, (msg)->
-    if msg.messageRoom == "#rauchen"
+smokealert = (robot,msg)->
       robot.smokecounter = if robot.smokecounter then robot.smokecounter+1 else 1
       if robot.smokecounter % 5 == 0
         msg.reply msg.random [
@@ -65,6 +36,36 @@ module.exports = (robot) ->
           "Rauchen fügt Ihnen und den Menschen in Ihrer Umgebung erheblichen Schaden zu."
         ]
 
+
+module.exports = (robot) ->
+  robot.hear /.*/, (msg) ->
+    user = msg.message.user.name.toLowerCase()
+    if user == donny and Math.random() < .3
+      msg.send msg.random walter_quotes
+    if msg.messageRoom == "#rauchen" or msg.message.text.match "rauchen"
+      smokealert(robot,msg)
+
+  robot.hear /(ZZ|:w|:wq|:wqa|:q)/, (msg) ->
+    msg.reply "Das ist nicht vim, das ist Slack!"
+
+  robot.hear /(hi|hey|hallo|hey there|hello|guten tag|whats up| what's up) cafina/i, (msg) ->
+    msg.reply "Woher weißt du meinen Namen? *Das hat dir der Teufel gesagt!!*"
+
+  robot.hear /(hi|hey|hallo|hey there|hello|guten tag|whats up| what's up) maschine/i, (msg) ->
+    greeting = msg.match[1]
+    user = msg.message.user.name
+    msg.send msg.random [
+      "hey there", "hey there", "hey there"
+      "war das #{user}?"
+      "hallöle", "ja?"
+      "na", "was?", "was denn?", "ja, #{user}"
+      "ich glaub #{user} mag mich"
+      "#{user}, #{greeting}"
+      "#{user}, kann ich dir helfen?"
+      "#{user}, Kaffee?"
+      "#{greeting} #{user}"
+    ]
+
   robot.hear /danke (kaffee)*maschine/i, (msg) ->
     user = msg.message.user.name
     msg.send msg.random [
@@ -79,7 +80,7 @@ module.exports = (robot) ->
     msg.send "das hoffe ich auch #{user}"
 
   robot.hear /maschine(.*)version/i, (msg) ->
-    msg.reply "Ich bin jetzt v0.1.2, find me on [github](http://github.com/ascii-dresden/maschine)"
+    msg.reply "Ich bin jetzt v0.1.3, find me on [github](http://github.com/ascii-dresden/maschine)"
 
   robot.hear /maschine ist (.*)/i, (msg) ->
     adj = msg.match[1].toLowerCase()
