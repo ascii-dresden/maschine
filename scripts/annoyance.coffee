@@ -11,7 +11,7 @@ module.exports = (robot) ->
     if robot.current_spammer.name == user
       robot.current_spammer.count += 1
       console.log robot.current_spammer
-    else
+    else if user.name != robot.name
       robot.current_spammer = {name: user, count: 0}
 
     if robot.current_spammer.count >= max_annoy + 3
