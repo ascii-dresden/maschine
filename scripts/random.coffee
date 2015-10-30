@@ -42,12 +42,9 @@ module.exports = (robot) ->
     user = msg.message.user.name.toLowerCase()
     if user == donny and Math.random() < .3
       msg.send msg.random walter_quotes
-    smokeys = /(rauchen|rauch|cigar|zigar|kippe|fl.mme|fl.ppe|tabak|tabac|glimmst.ngel|glimst.ngel|lungenbr.tchen)/i
-    if msg.messageRoom?.match(smokeys) or msg.message.text.match(smokeys)
+    smokeys = /(rauchen|rauch|cigar|zigar|kippe|fl.mme|fluppe|tabak|tabac|glimmst.ngel|glimst.ngel|lungenbr.tchen)/i
+    if msg.messageRoom == "rauchen" or msg.message.text.match(smokeys)
       smokealert(robot,msg)
-
-  robot.hear /(ZZ|:w|:wq|:wqa|:q)/, (msg) ->
-    msg.reply "Das ist nicht vim, das ist Slack!"
 
   robot.hear /(hi|hey|hallo|hey there|hello|guten tag|whats up| what's up) cafina/i, (msg) ->
     msg.reply "Woher weißt du meinen Namen? *Das hat dir der Teufel gesagt!!*"
