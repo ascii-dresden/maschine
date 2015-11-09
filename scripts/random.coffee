@@ -42,7 +42,7 @@ module.exports = (robot) ->
     user = msg.message.user.name.toLowerCase()
     if user == donny and Math.random() < .3
       msg.send msg.random walter_quotes
-    smokeys = /(rauchen|rauch|cigar|zigar|kippe|fl.mme|fluppe|tabak|tabac|glimmst.ngel|glimst.ngel|lungenbr.tchen)/i
+    smokeys = /(\srauchen|\srauch|cigar|zigar|\skippe|\sfl.mme|\sfluppe|tabak|tabac|glimmst.ngel|glimst.ngel|lungenbr.tchen)/i
     if msg.messageRoom == "rauchen" or msg.message.text.match(smokeys)
       smokealert(robot,msg)
 
